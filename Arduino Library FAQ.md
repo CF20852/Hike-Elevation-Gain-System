@@ -1,10 +1,10 @@
 # Arduino Library FAQ
 ## Where does the Arduino IDE look for libraries?
-The Arduino IDE looks for libraries in several places (the following is Windows specific):  (1) the libraries folder in your sketchbook, e.g. C:\Users\username\My Documents\Arduino\libraries; (2) in the libraries folder of the Arduino IDE installation folder, e.g. C:\Program Files (x86)\Arduino\libraries; (3) in the folders below C:\Program Files (x86)\Arduino\hardware, e.g., C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries; and (4) in your sketch folder.  If you want to include a library in one of the first three places, you should enclose the appropriate header file name in angle brackets (<>), e.g.,
+The Arduino IDE looks for libraries in several places (the following is Windows specific):  (1) the libraries folder in your sketchbook, e.g. C:\Users\username\My Documents\Arduino\libraries; (2) in the libraries folder of the Arduino IDE installation folder, e.g. C:\Program Files (x86)\Arduino\libraries; (3) in the folders below C:\Program Files (x86)\Arduino\hardware, e.g., C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries; and (4) in your sketch folder.  If you want to include a library in one of the first three places, you *should* enclose the appropriate header file name in angle brackets (<>), e.g.,
 
 `#include <SomeLib.h>`, 
 
-and if you want to include a library in your sketch (not sketchbook) folder, you must enclose the header file name in double quotes, e.g.
+and if you want to include a library in your sketch (not sketchbook) folder, you *must* enclose the header file name in double quotes, e.g.
 
 `#include "MyLib.h"`.
 
