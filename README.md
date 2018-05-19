@@ -1,6 +1,7 @@
 # Hike Elevation Gain System
 
-## :construction: Still! UNDER CONSTRUCTION :construction: 
+## :construction: Still! UNDER CONSTRUCTION :construction:
+There's just another week's worth of work to do, and there always will be.
 ## Description
 This tool uses a microcomputer connected to a GPS receiver and a barometric pressure sensor to record timestamped hike latitude, longitude, and both GPS and barometric elevation data, and a macro-enabled Excel workbook that processes the recorded data to calculate an accurate elevation gain value for a hike.  The workbook VBA macros can also generate a Keyhole Markup Language (.kml) file that can be used to plot the hike route using mapping software, and calculate the total distance of the hike and the distance from the start to various landmarks along the way.
 
