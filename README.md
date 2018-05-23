@@ -132,3 +132,7 @@ This figure shows the GPS altitude and corrected barometric elevation measured a
 
 ![Alt](https://photos.smugmug.com/Other/Misc/i-JsJMw6f/0/f5e78aa4/L/Stationary%20Test-L.jpg "Basement")
 
+This figure shows the filtered GPS, barometric, and Google Maps elevations with respect to distance from the beginning of a hike from where the Appalachian Trail crosses State Rte 94 south of Mount Holly Springs, Pennsylvania to Boiling Springs, Pennsylvania.  This used a u-blox NEO-M8N GNSS receiver, which I think I accidently left in AIR_4G dynamics mode, instead of PEDESTRIAN mode:
+
+![Alt](https://photos.smugmug.com/Other/Misc/i-rT3VFQF/0/2a55b18c/L/Wanderbirds%20Pine%20Grove-Boiling%20Springs%2020%20May%202018b-L.jpg "AT Hike 20 May 2018")
+
