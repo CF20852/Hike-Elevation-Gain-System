@@ -4,9 +4,10 @@ The Arduino IDE looks for libraries in several places (the following is Windows 
 
 `#include <SomeLib.h>`, 
 
-and if you want to include a library in your sketch (not sketchbook) folder, you *must* enclose the header file name in double quotes, e.g.
+and if you want to include a library in your sketch (not sketchbook) folder, or in a library folder inside a src folder in your sketch folder, you *must* enclose the header file name in double quotes, e.g.
 
-`#include "MyLib.h"`.
+`#include "MyLib.h"` or<br>
+`#include "src/MyLib1/src/MyLib1.h"`.
 
 Note that if you use the double-quote syntax, the Arduino IDE will also look in the places listed above for the angle brackets syntax if it doesn't find the source files in your sketch folder.
 
