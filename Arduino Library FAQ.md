@@ -19,7 +19,7 @@ Four options you can consider are:
 2.  If there are many source code files in the library, it might be better to place your sketch and the custom libraries it requires, along with any other libraries your sketch requires that are normally located in the default sketchbook folder, in a separate sketchbook folder.  You can tell the Arduino IDE to use that sketchbook folder by going to File... Preferences... Sketchbook location in the Arduino IDE and setting the sketchbook location to the appropriate folder.  You should maintain the structure of the original library folder(s), including maintaining the source code in a subfolder of your library folder(s) called "src".  You may also need to tailor the example sketches for your customized libraries according to your own needs, in which case the place to do it is within the examples folder of your library folder(s).  *Be aware that if you update a library using the Arduino Library Manager while the Arduino IDE sketchbook folder is set to your specific sketchbook location, the library in your specific sketchbook location will be overwritten.*  The sketchbook structure should end up looking something like this, assuming you have a folder in the root directory of your C: drive called Arduino Sketchbooks:
 
 C:
-<br>&nbsp<&nbsp|_Arduino Sketchbooks
+<br>&nbsp;&nbsp;|_Arduino Sketchbooks
 <br>    |_MySketchbook1
 <br>      |_MySketch1
 <br>       |_MySketch1.ino
