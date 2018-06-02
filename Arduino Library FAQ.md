@@ -58,7 +58,7 @@ And the sketch includes the libraries like this:
 
 Then the sketches can all share the other libraries that don't require any modifications.
 
-4.  Another option is to make each version of each library for which you need a hardware-specific variation a separate library in the main libraries folder (e.g., C:/Users/username/My Documents/Arduino/libraries) with a separate name. If you change the folder name then there is no problem with Library Manager updates overwriting the modified library. If you change the header file name then you will be able to control which library is included by your code. The advantage of this is that it would permit you to merge all of your sketch variations into one. The you can have a configuration macro at the top of the sketch:
+4.  Another option is to make each version of each library for which you need a hardware-specific variation a separate library in the main libraries folder (e.g., C:\Users\username\My Documents\Arduino\libraries) with a separate name. If you change the folder name then there is no problem with Library Manager updates overwriting the modified library. If you change the header file name then you will be able to control which library is included by your code. The advantage of this is that it would permit you to merge all of your sketch variations into one. The you can have a configuration macro at the top of the sketch:
 
 
 `// Uncomment one of the following lines to configure the sketch:`<br>
