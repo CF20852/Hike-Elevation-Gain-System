@@ -93,7 +93,7 @@ void setup() {
     ;
 
   DEBUG_PORT.println(F("Starting SD card, Microduino GPS, and BMP180....."));
-  
+
   DEBUG_PORT.println(F("Initializing log file name and SD card..."));
 
   // BEGIN SD CARD SECTION *****************************************************************************
@@ -153,7 +153,7 @@ void setup() {
 
   NMEAGPS::nmea_msg_t msgType[6] =
   {NMEAGPS::NMEA_GGA, NMEAGPS::NMEA_GLL, NMEAGPS::NMEA_GSA, NMEAGPS::NMEA_GSV, NMEAGPS::NMEA_RMC, NMEAGPS::NMEA_VTG};
-  uint8_t rate[6] = {1, 0, 1, 0, 0, 0};
+  uint8_t rate[6] = {1, 0, 1, 0, 1, 0};
 
   int maxI = (sizeof(msgType) / sizeof(NMEAGPS::nmea_msg_t));
 
@@ -186,6 +186,7 @@ void setup() {
 uint8_t lastGPSSeconds = 0;
 uint32_t timer = millis();
 float BMP180Temperature, BMP180Pressure, BMP180Altitude;
+bool fileDateSet = false;
 
 void loop() {
   // read data from the GPS in the 'main loop'
@@ -198,6 +199,18 @@ void loop() {
   //
   if ((fix.dateTime.seconds % recordingInterval == 0) && (fix.dateTime.seconds != lastGPSSeconds)) {
     lastGPSSeconds = fix.dateTime.seconds;
+
+    // if we have valid GPS date and time and we haven't set the file timestamp, do so now
+    if ( (!fileDateSet) && (fix.valid.date) && (fix.valid.time) ) {
+      if (!file.timestamp(T_CREATE | T_WRITE | T_ACCESS, (uint16_t)fix.dateTime.year + 2000, fix.dateTime.month, fix.dateTime.day,
+                          fix.dateTime.hours, fix.dateTime.minutes, fix.dateTime.seconds)) {
+        error("set file date failed");
+      }
+      else {
+        DEBUG_PORT.println(F("file timestamped OK"));
+        fileDateSet = true;
+      }
+    }
 
     // clear the dataString
     dataString.begin();

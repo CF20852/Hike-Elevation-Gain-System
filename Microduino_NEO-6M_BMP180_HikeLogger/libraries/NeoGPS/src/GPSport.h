@@ -54,5 +54,4 @@
 #define GPS_PORT_NAME "Serial1"
 #define DEBUG_PORT Serial
 
-
 #endif

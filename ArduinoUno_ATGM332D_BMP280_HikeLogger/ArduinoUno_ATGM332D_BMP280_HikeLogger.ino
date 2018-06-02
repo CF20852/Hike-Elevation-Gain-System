@@ -51,7 +51,7 @@ SdFile file;
 */
 
 /*In GPSfix_cfg.h of SlashDevin’s NeoGPS library, #define some parameters and comment out the definitions of others, as follows:
-  //#define GPS_FIX_DATE
+  #define GPS_FIX_DATE
   #define GPS_FIX_TIME
   #define GPS_FIX_LOCATION
   //#define GPS_FIX_LOCATION_DMS
@@ -146,8 +146,8 @@ void setup() {
   gpsPort.begin(38400);
   delay(100);
 
-  //configure the ATGM332D to send only GGA and GSA messages
-  nmeaGPS.send_P( &gpsPort, F("PCAS03,1,0,1,0,0,0,0,0") );
+  //configure the ATGM332D to send only GGA, GSA, and RMC messages
+  nmeaGPS.send_P( &gpsPort, F("PCAS03,1,0,1,0,1,0,0,0") );
 
   // END GPS SECTION ***********************************************************************************
 
@@ -164,7 +164,7 @@ void setup() {
 uint8_t lastGPSSeconds = 0;
 uint32_t timer = millis();
 float BMP280Temperature, BMP280Pressure, BMP280Altitude;
-
+bool fileDateSet = false;
 
 void loop() {
   // read data from the GPS in the 'main loop'
@@ -178,6 +178,18 @@ void loop() {
   //
   if ((fix.dateTime.seconds % recordingInterval == 0) && (fix.dateTime.seconds != lastGPSSeconds)) {
     lastGPSSeconds = fix.dateTime.seconds;
+
+    // if we have valid GPS date and time and we haven't set the file timestamp, do so now
+    if ( (!fileDateSet) && (fix.valid.date) && (fix.valid.time) ) {
+      if (!file.timestamp(T_CREATE | T_WRITE | T_ACCESS, (uint16_t)fix.dateTime.year + 2000, fix.dateTime.month, fix.dateTime.day,
+                          fix.dateTime.hours, fix.dateTime.minutes, fix.dateTime.seconds)) {
+        error("set file date failed");
+      }
+      else {
+        DEBUG_PORT.println(F("file timestamped OK"));
+        fileDateSet = true;
+      }
+    }
 
     // clear the dataString
     dataString.begin();

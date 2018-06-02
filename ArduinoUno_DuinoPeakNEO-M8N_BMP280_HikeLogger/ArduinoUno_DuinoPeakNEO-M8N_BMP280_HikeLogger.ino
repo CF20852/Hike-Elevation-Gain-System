@@ -167,10 +167,10 @@ void setup() {
   //restart the Arduino GPS port at 38.4 kbps
   gpsPort.begin(38400);
 
-  //Turn on NMEA messages GxGGA and GxGSA and turn everything else off
+  //Turn on NMEA messages GxGGA, GxGSA, GxRMC (which we only need for the date, once) and turn everything else off
   NMEAGPS::nmea_msg_t msgType[6] =
   {NMEAGPS::NMEA_GGA, NMEAGPS::NMEA_GLL, NMEAGPS::NMEA_GSA, NMEAGPS::NMEA_GSV, NMEAGPS::NMEA_RMC, NMEAGPS::NMEA_VTG};
-  uint8_t rate[6] = {1, 0, 1, 0, 0, 0};
+  uint8_t rate[6] = {1, 0, 1, 0, 1, 0};
 
   int maxI = (sizeof(msgType) / sizeof(NMEAGPS::nmea_msg_t));
 
@@ -225,6 +225,7 @@ void setup() {
 uint8_t lastGPSSeconds = 0;
 uint32_t timer = millis();
 float BMP280Temperature, BMP280Pressure, BMP280Altitude;
+bool fileDateSet = false;
 
 void loop() {
 
@@ -243,6 +244,18 @@ void loop() {
   if ((fix.dateTime.seconds % recordingInterval == 0) && (fix.dateTime.seconds != lastGPSSeconds) && (fix.latitude() != 0.0)) {
     lastGPSSeconds = fix.dateTime.seconds;
 
+    // if we have valid GPS date and time and we haven't set the file timestamp, do so now
+    if ( (!fileDateSet) && (fix.valid.date) && (fix.valid.time) ) {
+      if (!file.timestamp(T_CREATE | T_WRITE | T_ACCESS, (uint16_t)fix.dateTime.year + 2000, fix.dateTime.month, fix.dateTime.day,
+                                                                   fix.dateTime.hours, fix.dateTime.minutes, fix.dateTime.seconds)) {
+        error("set file date failed");
+      }
+      else {
+        DEBUG_PORT.println(F("file timestamped OK"));
+        fileDateSet = true;
+      }
+    }
+    
     // clear the dataString
     dataString.begin();
 
